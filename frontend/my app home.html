@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>My App Home</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    height:100vh;
+    background:linear-gradient(135deg,#2563eb,#7c3aed);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+
+/* Main container */
+
+.container{
+    width:80%;
+    max-width:900px;
+    background:white;
+    border-radius:20px;
+    padding:40px;
+    text-align:center;
+    box-shadow:0 10px 30px rgba(0,0,0,0.2);
+}
+
+
+/* Logo */
+
+.logo{
+    width:120px;
+    height:120px;
+    margin:auto;
+    border-radius:50%;
+    background:#2563eb;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:white;
+    font-size:45px;
+    font-weight:bold;
+}
+
+
+/* App name */
+
+h1{
+    margin-top:20px;
+    font-size:40px;
+    color:#1e293b;
+}
+
+
+.description{
+    margin:20px auto;
+    max-width:650px;
+    font-size:18px;
+    color:#64748b;
+    line-height:1.6;
+}
+
+
+/* Buttons */
+
+.buttons{
+    margin-top:30px;
+}
+
+
+button{
+
+    padding:15px 35px;
+    margin:10px;
+    border:none;
+    border-radius:30px;
+    font-size:17px;
+    cursor:pointer;
+    color:white;
+}
+
+
+.dashboard{
+    background:#2563eb;
+}
+
+
+.upload{
+    background:#16a34a;
+}
+
+
+button:hover{
+    transform:scale(1.05);
+    opacity:0.9;
+}
+
+
+.footer{
+
+    margin-top:30px;
+    color:#94a3b8;
+    font-size:14px;
+
+}
+
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+<!-- App Logo -->
+
+<div class="logo">
+🤖
+</div>
+
+
+<!-- App Information -->
+
+<h1>
+Image Analyzer
+</h1>
+
+
+<p class="description">
+
+Welcome to Fake Face Detector App.  
+Our application helps users upload images, analyze visual information, and get intelligent results using advanced image processing technology.
+
+Upload your images easily and manage your analysis from the dashboard.
+
+</p>
+
+
+
+<!-- Buttons -->
+
+<div class="buttons">
+
+
+<!-- Opens Dashboard -->
+
+<a href="dashboard.html">
+<button class="dashboard">
+Open Dashboard
+</button>
+</a>
+
+
+
+<!-- Opens your index.html upload page -->
+
+<a href="index.html">
+<button class="upload">
+Upload Image
+</button>
+</a>
+
+
+</div>
+
+
+<div class="footer">
+© 2026 AI Image Analyzer
+</div>
+
+
+</div>
+
+
+</body>
+
+</html>

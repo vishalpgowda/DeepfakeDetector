@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fake Face Detector</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+    background:linear-gradient(-45deg,#0f2027,#203a43,#2c5364,#1c1c1c);
+    background-size:400% 400%;
+    animation:gradient 12s ease infinite;
+}
+
+/* Animated Background */
+@keyframes gradient{
+    0%{
+        background-position:0% 50%;
+    }
+    50%{
+        background-position:100% 50%;
+    }
+    100%{
+        background-position:0% 50%;
+    }
+}
+
+/* Login Button */
+.login-btn{
+    position:absolute;
+    top:20px;
+    right:30px;
+    padding:12px 28px;
+    font-size:16px;
+    font-weight:bold;
+    color:white;
+    background:#00bcd4;
+    border:none;
+    border-radius:30px;
+    cursor:pointer;
+    transition:0.3s ease;
+    box-shadow:0 0 10px rgba(0,188,212,0.7);
+}
+
+.login-btn:hover{
+    background:#0097a7;
+    transform:scale(1.08);
+    box-shadow:0 0 20px rgba(0,188,212,1);
+}
+
+/* Center Content */
+.container{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}
+
+/* Robot Logo */
+.logo{
+    font-size:90px;
+    margin-bottom:20px;
+    text-shadow:
+        0 0 10px #00e5ff,
+        0 0 20px #00e5ff,
+        0 0 40px #00e5ff;
+}
+
+/* Project Title */
+h1{
+    color:white;
+    font-size:70px;
+    text-transform:uppercase;
+    letter-spacing:5px;
+    text-align:center;
+    text-shadow:
+        0 0 10px #00e5ff,
+        0 0 20px #00e5ff,
+        0 0 40px #00e5ff;
+}
+</style>
+
+</head>
+<body>
+
+<button class="login-btn" onclick="login()">Login</button>
+
+<div class="container">
+
+    <div class="logo">🤖</div>
+
+    <h1>Fake Face Detector</h1>
+
+</div>
+
+<script>
+function login(){
+    window.location.href = "login.html";
+}
+</script>
+
+</body>
+</html>

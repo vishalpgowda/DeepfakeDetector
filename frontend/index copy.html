@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FakeFace Detector</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS File -->
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+    <header style="position:relative;">
+
+        <h1>🤖 FakeFace Detector</h1>
+        <p>Deepfake Image & Video Detection System</p>
+
+        <!-- Dashboard Button -->
+        <a href="dashboard.html"
+            style="
+            position:absolute;
+            top:20px;
+            right:30px;
+            background:#2563eb;
+            color:white;
+            text-decoration:none;
+            padding:10px 20px;
+            border-radius:8px;
+            font-weight:600;
+            font-family:Poppins, sans-serif;
+            transition:0.3s;">
+            📊 Dashboard
+        </a>
+
+    </header>
+
+    <div class="container">
+
+        <div class="card">
+
+            <h2>Upload Image or Video</h2>
+
+            <input type="file" id="fileInput" accept="image/*,video/*">
+
+            <div id="preview"></div>
+
+            <button onclick="analyzeFile()">
+                Analyze
+            </button>
+
+            <div id="loading" class="loading">
+                🔍 AI is analyzing...
+            </div>
+
+            <div id="result"></div>
+
+        </div>
+
+    </div>
+
+    <footer>
+        © 2026 FakeFace Detector | AI Project
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
