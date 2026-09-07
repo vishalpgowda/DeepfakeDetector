@@ -2,10 +2,11 @@
 <html lang="en">
 
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>My App Home</title>
+<title>Home | Deepfake Detector</title>
 
 <style>
 
@@ -13,109 +14,970 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial, sans-serif;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
 }
 
 body{
-    height:100vh;
-    background:linear-gradient(135deg,#2563eb,#7c3aed);
+    min-height:100vh;
+    color:white;
+
+    background:
+        radial-gradient(
+            circle at 20% 20%,
+            rgba(0,229,255,0.10),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 80% 80%,
+            rgba(0,120,255,0.10),
+            transparent 30%
+        ),
+        linear-gradient(
+            135deg,
+            #040b12,
+            #071923,
+            #031018
+        );
+}
+
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar{
+
+    position:sticky;
+
+    top:0;
+
+    z-index:100;
+
+    height:75px;
+
     display:flex;
-    justify-content:center;
+
     align-items:center;
+
+    justify-content:space-between;
+
+    padding:0 45px;
+
+    background:
+        rgba(4,15,24,0.88);
+
+    border-bottom:
+        1px solid rgba(0,229,255,0.15);
+
+    backdrop-filter:blur(18px);
 }
 
-
-/* Main container */
-
-.container{
-    width:80%;
-    max-width:900px;
-    background:white;
-    border-radius:20px;
-    padding:40px;
-    text-align:center;
-    box-shadow:0 10px 30px rgba(0,0,0,0.2);
-}
-
-
-/* Logo */
 
 .logo{
-    width:120px;
-    height:120px;
-    margin:auto;
-    border-radius:50%;
-    background:#2563eb;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    color:white;
-    font-size:45px;
+
+    color:#00e5ff;
+
+    font-size:20px;
+
     font-weight:bold;
+
+    letter-spacing:1px;
 }
 
 
-/* App name */
+.nav-links{
 
-h1{
-    margin-top:20px;
-    font-size:40px;
-    color:#1e293b;
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    list-style:none;
 }
 
 
-.description{
-    margin:20px auto;
-    max-width:650px;
-    font-size:18px;
-    color:#64748b;
+.nav-links a{
+
+    color:#9db0bd;
+
+    text-decoration:none;
+
+    padding:10px 14px;
+
+    border-radius:8px;
+
+    font-size:14px;
+
+    transition:0.3s;
+}
+
+
+.nav-links a:hover{
+
+    color:#00e5ff;
+
+    background:
+        rgba(0,229,255,0.07);
+}
+
+
+.nav-links .active{
+
+    color:#00e5ff;
+
+    background:
+        rgba(0,229,255,0.08);
+}
+
+
+.login-btn{
+
+    padding:10px 18px !important;
+
+    color:white !important;
+
+    background:
+        linear-gradient(
+            90deg,
+            #00a9c0,
+            #00e5ff
+        ) !important;
+
+    box-shadow:
+        0 0 18px rgba(0,229,255,0.12);
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+
+    min-height:
+        calc(100vh - 75px);
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    text-align:center;
+
+    padding:70px 25px;
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+
+.hero::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:500px;
+
+    height:500px;
+
+    left:-200px;
+
+    top:-180px;
+
+    border-radius:50%;
+
+    background:
+        rgba(0,229,255,0.06);
+
+    filter:blur(20px);
+}
+
+
+.hero::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:400px;
+
+    height:400px;
+
+    right:-180px;
+
+    bottom:-180px;
+
+    border-radius:50%;
+
+    background:
+        rgba(0,120,255,0.07);
+
+    filter:blur(20px);
+}
+
+
+.hero-content{
+
+    max-width:900px;
+
+    position:relative;
+
+    z-index:2;
+}
+
+
+.ai-icon{
+
+    width:100px;
+
+    height:100px;
+
+    margin:0 auto 25px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:25px;
+
+    font-size:52px;
+
+    background:
+        rgba(0,229,255,0.07);
+
+    border:
+        1px solid rgba(0,229,255,0.22);
+
+    box-shadow:
+        0 0 40px rgba(0,229,255,0.10);
+}
+
+
+.hero h1{
+
+    font-size:58px;
+
+    line-height:1.1;
+
+    margin-bottom:20px;
+}
+
+
+.hero h1 span{
+
+    color:#00e5ff;
+
+}
+
+
+.hero p{
+
+    max-width:700px;
+
+    margin:auto;
+
+    color:#8fa6b4;
+
+    font-size:17px;
+
+    line-height:1.8;
+}
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+.hero-buttons{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:15px;
+
+    margin-top:35px;
+
+    flex-wrap:wrap;
+}
+
+
+.primary-btn{
+
+    padding:14px 25px;
+
+    border-radius:10px;
+
+    text-decoration:none;
+
+    color:white;
+
+    font-size:14px;
+
+    font-weight:bold;
+
+    background:
+        linear-gradient(
+            90deg,
+            #00a9c0,
+            #00e5ff
+        );
+
+    box-shadow:
+        0 10px 30px rgba(0,229,255,0.12);
+
+    transition:0.3s;
+}
+
+
+.primary-btn:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:
+        0 15px 35px rgba(0,229,255,0.20);
+}
+
+
+.secondary-btn{
+
+    padding:14px 25px;
+
+    border-radius:10px;
+
+    text-decoration:none;
+
+    color:#a9bbc5;
+
+    font-size:14px;
+
+    font-weight:bold;
+
+    background:
+        rgba(255,255,255,0.05);
+
+    border:
+        1px solid rgba(255,255,255,0.10);
+
+    transition:0.3s;
+}
+
+
+.secondary-btn:hover{
+
+    color:#00e5ff;
+
+    border-color:
+        rgba(0,229,255,0.30);
+}
+
+
+/* =========================
+   STATS
+========================= */
+
+.hero-stats{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:45px;
+
+    margin-top:55px;
+
+    flex-wrap:wrap;
+}
+
+
+.hero-stat{
+
+    min-width:120px;
+}
+
+
+.hero-stat strong{
+
+    display:block;
+
+    font-size:25px;
+
+    color:#00e5ff;
+
+    margin-bottom:5px;
+}
+
+
+.hero-stat span{
+
+    color:#718692;
+
+    font-size:11px;
+
+    text-transform:uppercase;
+
+    letter-spacing:1px;
+}
+
+
+/* =========================
+   GENERAL SECTION
+========================= */
+
+.container{
+
+    width:100%;
+
+    max-width:1200px;
+
+    margin:auto;
+
+    padding:80px 25px;
+}
+
+
+.section-heading{
+
+    text-align:center;
+
+    margin-bottom:45px;
+}
+
+
+.section-heading h2{
+
+    font-size:30px;
+
+    margin-bottom:10px;
+}
+
+
+.section-heading h2 span{
+
+    color:#00e5ff;
+}
+
+
+.section-heading p{
+
+    color:#718692;
+
+    font-size:14px;
+}
+
+
+/* =========================
+   FEATURES
+========================= */
+
+.features{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(240px,1fr)
+        );
+
+    gap:20px;
+}
+
+
+.feature-card{
+
+    padding:28px;
+
+    border-radius:17px;
+
+    background:
+        rgba(255,255,255,0.055);
+
+    border:
+        1px solid rgba(255,255,255,0.08);
+
+    backdrop-filter:blur(15px);
+
+    box-shadow:
+        0 15px 35px rgba(0,0,0,0.25);
+
+    transition:0.3s;
+}
+
+
+.feature-card:hover{
+
+    transform:translateY(-6px);
+
+    border-color:
+        rgba(0,229,255,0.25);
+
+    box-shadow:
+        0 20px 40px rgba(0,0,0,0.35);
+}
+
+
+.feature-icon{
+
+    width:55px;
+
+    height:55px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:13px;
+
+    margin-bottom:20px;
+
+    font-size:27px;
+
+    background:
+        rgba(0,229,255,0.08);
+
+    border:
+        1px solid rgba(0,229,255,0.10);
+}
+
+
+.feature-card h3{
+
+    font-size:17px;
+
+    margin-bottom:10px;
+}
+
+
+.feature-card p{
+
+    color:#8197a4;
+
+    font-size:13px;
+
+    line-height:1.7;
+}
+
+
+/* =========================
+   HOW IT WORKS
+========================= */
+
+.workflow{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(190px,1fr)
+        );
+
+    gap:15px;
+}
+
+
+.workflow-card{
+
+    text-align:center;
+
+    padding:25px 18px;
+
+    border-radius:15px;
+
+    background:
+        rgba(255,255,255,0.045);
+
+    border:
+        1px solid rgba(255,255,255,0.07);
+}
+
+
+.step{
+
+    width:45px;
+
+    height:45px;
+
+    margin:0 auto 15px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:50%;
+
+    font-weight:bold;
+
+    background:
+        linear-gradient(
+            135deg,
+            #00a9c0,
+            #00e5ff
+        );
+
+    box-shadow:
+        0 0 20px rgba(0,229,255,0.15);
+}
+
+
+.workflow-card h3{
+
+    font-size:14px;
+
+    margin-bottom:8px;
+}
+
+
+.workflow-card p{
+
+    color:#718692;
+
+    font-size:12px;
+
     line-height:1.6;
 }
 
 
-/* Buttons */
+/* =========================
+   DETECTION PANEL
+========================= */
 
-.buttons{
-    margin-top:30px;
+.detection-panel{
+
+    display:grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:25px;
+
+    align-items:center;
+
+    padding:35px;
+
+    border-radius:20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(0,169,192,0.12),
+            rgba(255,255,255,0.04)
+        );
+
+    border:
+        1px solid rgba(0,229,255,0.15);
 }
 
 
-button{
+.detection-text h2{
 
-    padding:15px 35px;
-    margin:10px;
-    border:none;
-    border-radius:30px;
-    font-size:17px;
-    cursor:pointer;
-    color:white;
+    font-size:28px;
+
+    margin-bottom:15px;
 }
 
 
-.dashboard{
-    background:#2563eb;
+.detection-text h2 span{
+
+    color:#00e5ff;
 }
 
 
-.upload{
-    background:#16a34a;
-}
+.detection-text p{
 
+    color:#8197a4;
 
-button:hover{
-    transform:scale(1.05);
-    opacity:0.9;
-}
+    line-height:1.8;
 
-
-.footer{
-
-    margin-top:30px;
-    color:#94a3b8;
     font-size:14px;
 
+    margin-bottom:20px;
 }
 
+
+.detection-list{
+
+    list-style:none;
+}
+
+
+.detection-list li{
+
+    padding:9px 0;
+
+    color:#9db0bd;
+
+    font-size:13px;
+}
+
+
+.detection-list li::first-letter{
+
+    color:#38e88b;
+}
+
+
+/* =========================
+   AI VISUAL
+========================= */
+
+.ai-visual{
+
+    min-height:270px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    position:relative;
+}
+
+
+.scan-circle{
+
+    width:190px;
+
+    height:190px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:65px;
+
+    background:
+        rgba(0,229,255,0.05);
+
+    border:
+        1px solid rgba(0,229,255,0.25);
+
+    box-shadow:
+        0 0 40px rgba(0,229,255,0.10);
+
+    animation:pulse 3s infinite;
+}
+
+
+.scan-circle::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:240px;
+
+    height:240px;
+
+    border-radius:50%;
+
+    border:
+        1px dashed rgba(0,229,255,0.18);
+
+    animation:rotate 12s linear infinite;
+}
+
+
+@keyframes pulse{
+
+    0%,100%{
+        box-shadow:
+            0 0 30px rgba(0,229,255,0.08);
+    }
+
+    50%{
+        box-shadow:
+            0 0 60px rgba(0,229,255,0.20);
+    }
+
+}
+
+
+@keyframes rotate{
+
+    from{
+        transform:rotate(0deg);
+    }
+
+    to{
+        transform:rotate(360deg);
+    }
+
+}
+
+
+/* =========================
+   CTA
+========================= */
+
+.cta{
+
+    text-align:center;
+
+    padding:70px 25px;
+
+    border-top:
+        1px solid rgba(255,255,255,0.05);
+
+    border-bottom:
+        1px solid rgba(255,255,255,0.05);
+
+    background:
+        rgba(0,229,255,0.025);
+}
+
+
+.cta h2{
+
+    font-size:30px;
+
+    margin-bottom:12px;
+}
+
+
+.cta h2 span{
+
+    color:#00e5ff;
+}
+
+
+.cta p{
+
+    color:#718692;
+
+    font-size:14px;
+
+    margin-bottom:25px;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+
+    text-align:center;
+
+    padding:30px 20px;
+
+    color:#526875;
+
+    font-size:12px;
+}
+
+
+.footer-logo{
+
+    color:#00e5ff;
+
+    font-weight:bold;
+
+    margin-bottom:8px;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:800px){
+
+    .navbar{
+
+        padding:0 20px;
+    }
+
+
+    .nav-links{
+
+        display:none;
+    }
+
+
+    .hero h1{
+
+        font-size:42px;
+    }
+
+
+    .hero p{
+
+        font-size:15px;
+    }
+
+
+    .detection-panel{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+
+@media(max-width:480px){
+
+    .hero{
+
+        padding:55px 20px;
+    }
+
+
+    .hero h1{
+
+        font-size:34px;
+    }
+
+
+    .ai-icon{
+
+        width:80px;
+
+        height:80px;
+
+        font-size:42px;
+    }
+
+
+    .hero-stats{
+
+        gap:25px;
+    }
+
+
+    .container{
+
+        padding:60px 20px;
+    }
+
+
+    .section-heading h2{
+
+        font-size:25px;
+    }
+
+}
 
 </style>
 
@@ -125,67 +987,513 @@ button:hover{
 <body>
 
 
-<div class="container">
+<!-- =========================
+     NAVBAR
+========================= -->
+
+<nav class="navbar">
+
+    <div class="logo">
+        🤖 DEEPFAKE DETECTOR
+    </div>
 
 
-<!-- App Logo -->
+    <ul class="nav-links">
 
-<div class="logo">
-🤖
-</div>
+        <li>
+            <a
+                href="my app home.html"
+                class="active"
+            >
+                Home
+            </a>
+        </li>
 
+        <li>
+            <a href="dashboard.html">
+                Dashboard
+            </a>
+        </li>
 
-<!-- App Information -->
+        <li>
+            <a href="index.html">
+                Upload
+            </a>
+        </li>
 
-<h1>
-Image Analyzer
-</h1>
+        <li>
+            <a href="analytics.html">
+                Analytics
+            </a>
+        </li>
 
+        <li>
+            <a href="about.html">
+                About
+            </a>
+        </li>
 
-<p class="description">
+        <li>
+            <a href="profile.html">
+                Profile
+            </a>
+        </li>
 
-Welcome to Fake Face Detector App.  
-Our application helps users upload images, analyze visual information, and get intelligent results using advanced image processing technology.
+        <li>
+            <a
+                href="login.html"
+                class="login-btn"
+            >
+                Login
+            </a>
+        </li>
 
-Upload your images easily and manage your analysis from the dashboard.
+    </ul>
 
-</p>
-
-
-
-<!-- Buttons -->
-
-<div class="buttons">
-
-
-<!-- Opens Dashboard -->
-
-<a href="dashboard.html">
-<button class="dashboard">
-Open Dashboard
-</button>
-</a>
-
-
-
-<!-- Opens your index.html upload page -->
-
-<a href="index.html">
-<button class="upload">
-Upload Image
-</button>
-</a>
-
-
-</div>
-
-
-<div class="footer">
-© 2026 AI Image Analyzer
-</div>
+</nav>
 
 
-</div>
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <div class="ai-icon">
+            🧠
+        </div>
+
+
+        <h1>
+            Detect the <span>Fake.</span><br>
+            Trust the <span>Real.</span>
+        </h1>
+
+
+        <p>
+
+            An AI-powered deepfake detection system designed
+            to analyze images and videos and identify possible
+            manipulated or AI-generated media.
+
+        </p>
+
+
+        <div class="hero-buttons">
+
+            <a
+                href="index.html"
+                class="primary-btn"
+            >
+                🔍 Start Detection
+            </a>
+
+
+            <a
+                href="about.html"
+                class="secondary-btn"
+            >
+                ℹ️ Learn More
+            </a>
+
+        </div>
+
+
+        <div class="hero-stats">
+
+            <div class="hero-stat">
+
+                <strong>
+                    AI
+                </strong>
+
+                <span>
+                    Powered
+                </span>
+
+            </div>
+
+
+            <div class="hero-stat">
+
+                <strong>
+                    24/7
+                </strong>
+
+                <span>
+                    Ready
+                </span>
+
+            </div>
+
+
+            <div class="hero-stat">
+
+                <strong>
+                    2
+                </strong>
+
+                <span>
+                    Media Types
+                </span>
+
+            </div>
+
+
+            <div class="hero-stat">
+
+                <strong>
+                    ⚡
+                </strong>
+
+                <span>
+                    Fast Analysis
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     FEATURES
+========================= -->
+
+<section class="container">
+
+    <div class="section-heading">
+
+        <h2>
+            Powerful <span>Detection Features</span>
+        </h2>
+
+        <p>
+            Built to help identify suspicious digital media
+        </p>
+
+    </div>
+
+
+    <div class="features">
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                🖼️
+            </div>
+
+            <h3>
+                Image Detection
+            </h3>
+
+            <p>
+
+                Upload an image and let the AI model
+                examine its visual characteristics for
+                possible manipulation.
+
+            </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                🎥
+            </div>
+
+            <h3>
+                Video Analysis
+            </h3>
+
+            <p>
+
+                Analyze supported video files and inspect
+                their visual information for potential
+                deepfake content.
+
+            </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                🧠
+            </div>
+
+            <h3>
+                Deep Learning
+            </h3>
+
+            <p>
+
+                A deep learning model analyzes visual
+                patterns and generates a prediction
+                with a confidence score.
+
+            </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                📊
+            </div>
+
+            <h3>
+                Smart Analytics
+            </h3>
+
+            <p>
+
+                Track your previous detection activity
+                using the analytics dashboard and
+                analysis history.
+
+            </p>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     HOW IT WORKS
+========================= -->
+
+<section class="container">
+
+    <div class="section-heading">
+
+        <h2>
+            How <span>It Works</span>
+        </h2>
+
+        <p>
+            Simple steps from upload to detection
+        </p>
+
+    </div>
+
+
+    <div class="workflow">
+
+
+        <div class="workflow-card">
+
+            <div class="step">
+                1
+            </div>
+
+            <h3>
+                Upload
+            </h3>
+
+            <p>
+                Select an image or video from your device.
+            </p>
+
+        </div>
+
+
+        <div class="workflow-card">
+
+            <div class="step">
+                2
+            </div>
+
+            <h3>
+                Process
+            </h3>
+
+            <p>
+                The media is prepared for AI processing.
+            </p>
+
+        </div>
+
+
+        <div class="workflow-card">
+
+            <div class="step">
+                3
+            </div>
+
+            <h3>
+                Analyze
+            </h3>
+
+            <p>
+                The deep learning model examines visual features.
+            </p>
+
+        </div>
+
+
+        <div class="workflow-card">
+
+            <div class="step">
+                4
+            </div>
+
+            <h3>
+                Predict
+            </h3>
+
+            <p>
+                The system generates a Real or Deepfake prediction.
+            </p>
+
+        </div>
+
+
+        <div class="workflow-card">
+
+            <div class="step">
+                5
+            </div>
+
+            <h3>
+                Result
+            </h3>
+
+            <p>
+                View the prediction and confidence score.
+            </p>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     AI DETECTION PANEL
+========================= -->
+
+<section class="container">
+
+    <div class="detection-panel">
+
+
+        <div class="detection-text">
+
+            <h2>
+                Advanced <span>AI Analysis</span>
+            </h2>
+
+
+            <p>
+
+                Modern AI-generated media can be difficult
+                to identify manually. Our detection system
+                uses machine learning to examine visual
+                information and provide an automated
+                assessment.
+
+            </p>
+
+
+            <ul class="detection-list">
+
+                <li>
+                    ✓ Image-based detection
+                </li>
+
+                <li>
+                    ✓ Video media support
+                </li>
+
+                <li>
+                    ✓ Confidence score
+                </li>
+
+                <li>
+                    ✓ Analysis history
+                </li>
+
+                <li>
+                    ✓ Secure user authentication
+                </li>
+
+            </ul>
+
+        </div>
+
+
+        <div class="ai-visual">
+
+            <div class="scan-circle">
+                🤖
+            </div>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     CALL TO ACTION
+========================= -->
+
+<section class="cta">
+
+    <h2>
+        Ready to <span>Analyze Media?</span>
+    </h2>
+
+    <p>
+        Upload an image or video and start your AI-powered
+        deepfake detection analysis.
+    </p>
+
+
+    <a
+        href="index.html"
+        class="primary-btn"
+    >
+        🚀 Start Detection
+    </a>
+
+</section>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    <div class="footer-logo">
+        🤖 DEEPFAKE DETECTOR
+    </div>
+
+    <p>
+        © 2026 Deepfake Face Detector |
+        AI Powered Detection System
+    </p>
+
+</footer>
 
 
 </body>

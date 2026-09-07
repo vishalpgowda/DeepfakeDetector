@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>My Profile</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+
+    background:linear-gradient(
+        135deg,
+        #0f2027,
+        #203a43,
+        #2c5364
+    );
+
+    color:white;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    min-height:100vh;
+
+}
+
+.container{
+
+    width:90%;
+
+    max-width:700px;
+
+    background:rgba(255,255,255,0.1);
+
+    padding:30px;
+
+    border-radius:15px;
+
+    box-shadow:0 8px 20px rgba(0,0,0,0.3);
+
+}
+
+.logo{
+
+    width:100px;
+
+    height:100px;
+
+    margin:0 auto 15px;
+
+    border-radius:50%;
+
+    background:#00bcd4;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:50px;
+
+}
+
+h1{
+
+    text-align:center;
+
+    margin-bottom:10px;
+
+    color:#00e5ff;
+
+}
+
+.subtitle{
+
+    text-align:center;
+
+    color:#d1d5db;
+
+    margin-bottom:25px;
+
+}
+
+
+/* Profile information */
+
+.info{
+
+    margin:15px 0;
+
+    font-size:18px;
+
+    line-height:2;
+
+}
+
+.info p{
+
+    border-bottom:1px solid rgba(255,255,255,0.15);
+
+    padding:5px 0;
+
+}
+
+.info strong{
+
+    color:#00e5ff;
+
+}
+
+
+/* Edit profile */
+
+.edit-section{
+
+    margin-top:25px;
+
+    padding-top:20px;
+
+    border-top:1px solid rgba(255,255,255,0.2);
+
+}
+
+.edit-section h2{
+
+    color:#00e5ff;
+
+    margin-bottom:15px;
+
+    font-size:20px;
+
+}
+
+.edit-section label{
+
+    display:block;
+
+    margin-bottom:8px;
+
+    color:#d1d5db;
+
+}
+
+.edit-section input{
+
+    width:100%;
+
+    padding:12px;
+
+    border:none;
+
+    border-radius:8px;
+
+    font-size:16px;
+
+    outline:none;
+
+}
+
+
+/* Buttons */
+
+.button-group{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:12px;
+
+    flex-wrap:wrap;
+
+    margin-top:20px;
+
+}
+
+.save-btn,
+.back-btn,
+.logout-btn{
+
+    padding:12px 22px;
+
+    border:none;
+
+    border-radius:25px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    text-decoration:none;
+
+    transition:0.3s;
+
+}
+
+.save-btn{
+
+    background:#00bcd4;
+
+    color:white;
+
+}
+
+.save-btn:hover{
+
+    background:#0097a7;
+
+}
+
+.back-btn{
+
+    background:#607d8b;
+
+    color:white;
+
+}
+
+.back-btn:hover{
+
+    background:#455a64;
+
+}
+
+.logout-btn{
+
+    background:#e53935;
+
+    color:white;
+
+}
+
+.logout-btn:hover{
+
+    background:#c62828;
+
+}
+
+
+/* Message */
+
+#message{
+
+    text-align:center;
+
+    margin-top:15px;
+
+    font-weight:bold;
+
+    display:none;
+
+}
+
+
+/* Footer */
+
+footer{
+
+    text-align:center;
+
+    margin-top:25px;
+
+    color:#ccc;
+
+    font-size:14px;
+
+}
+
+
+/* Mobile */
+
+@media(max-width:600px){
+
+    .container{
+
+        padding:20px;
+
+    }
+
+    .info{
+
+        font-size:16px;
+
+    }
+
+    .button-group{
+
+        flex-direction:column;
+
+    }
+
+    .save-btn,
+    .back-btn,
+    .logout-btn{
+
+        width:100%;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- Profile Icon -->
+
+<div
+    class="logo"
+    id="profileIcon"
+>
+👤
+</div>
+
+<h1>
+My Profile
+</h1>
+
+<p class="subtitle">
+Deepfake Detector User Profile
+</p>
+
+<!-- User Information -->
+
+<div class="info">
+
+<p>
+<strong>Name:</strong>
+<span id="userName">Loading...</span>
+</p>
+
+<p>
+<strong>Email:</strong>
+<span id="userEmail">Loading...</span>
+</p>
+
+<p>
+<strong>User ID:</strong>
+<span id="userId">Loading...</span>
+</p>
+
+<p>
+<strong>Account Created:</strong>
+<span id="createdAt">Loading...</span>
+</p>
+
+</div>
+
+<!-- Edit Profile -->
+
+<div class="edit-section">
+
+<h2>
+Edit Profile
+</h2>
+
+<label for="nameInput">
+Change Display Name
+</label>
+
+<input
+type="text"
+id="nameInput"
+placeholder="Enter your name"
+
+>
+
+<div class="button-group">
+
+<button
+id="saveBtn"
+class="save-btn"
+
+>
+
+💾 Save Changes </button>
+
+<a
+href="dashboard.html"
+class="back-btn"
+
+>
+
+⬅ Back to Dashboard </a>
+
+<button
+id="logoutBtn"
+class="logout-btn"
+
+>
+
+🚪 Logout </button>
+
+</div>
+
+<p id="message"></p>
+
+</div>
+
+<footer>
+
+© 2026 Deepfake Face Detector | AI Powered System
+
+</footer>
+
+</div>
+
+<!-- Firebase Authentication -->
+
+<script type="module">
+
+import { auth } from "./src/firebase.js";
+
+import {
+    onAuthStateChanged,
+    updateProfile,
+    signOut
+} from "firebase/auth";
+
+
+/*
+=========================================
+HTML ELEMENTS
+=========================================
+*/
+
+const userName =
+    document.getElementById("userName");
+
+const userEmail =
+    document.getElementById("userEmail");
+
+const userId =
+    document.getElementById("userId");
+
+const createdAt =
+    document.getElementById("createdAt");
+
+const nameInput =
+    document.getElementById("nameInput");
+
+const profileIcon =
+    document.getElementById("profileIcon");
+
+const saveBtn =
+    document.getElementById("saveBtn");
+
+const logoutBtn =
+    document.getElementById("logoutBtn");
+
+const message =
+    document.getElementById("message");
+
+
+/*
+=========================================
+SHOW MESSAGE
+=========================================
+*/
+
+function showMessage(text, success = true){
+
+    message.textContent = text;
+
+    message.style.display = "block";
+
+    message.style.color =
+        success ? "#00ff88" : "#ff5252";
+
+}
+
+
+/*
+=========================================
+CHECK CURRENT USER
+=========================================
+*/
+
+onAuthStateChanged(auth, (user) => {
+
+    if(user){
+
+        const name =
+            user.displayName || "User";
+
+        const email =
+            user.email || "Not available";
+
+        const uid =
+            user.uid || "Not available";
+
+
+        /*
+        Display information
+        */
+
+        userName.textContent = name;
+
+        userEmail.textContent = email;
+
+        userId.textContent = uid;
+
+        nameInput.value = name;
+
+
+        /*
+        Profile initial
+        */
+
+        profileIcon.textContent =
+            name.charAt(0).toUpperCase();
+
+
+        /*
+        Account creation date
+        */
+
+        if(
+            user.metadata &&
+            user.metadata.creationTime
+        ){
+
+            const date =
+                new Date(
+                    user.metadata.creationTime
+                );
+
+            createdAt.textContent =
+                date.toLocaleDateString(
+                    "en-IN",
+                    {
+                        day:"2-digit",
+                        month:"long",
+                        year:"numeric"
+                    }
+                );
+
+        }else{
+
+            createdAt.textContent =
+                "Not available";
+
+        }
+
+
+    }else{
+
+        /*
+        User is not logged in
+        */
+
+        window.location.href =
+            "login.html";
+
+    }
+
+});
+
+
+/*
+=========================================
+SAVE PROFILE
+=========================================
+*/
+
+saveBtn.addEventListener(
+    "click",
+    async () => {
+
+        const newName =
+            nameInput.value.trim();
+
+
+        /*
+        Check name
+        */
+
+        if(!newName){
+
+            showMessage(
+                "Please enter a name.",
+                false
+            );
+
+            return;
+
+        }
+
+
+        if(newName.length < 2){
+
+            showMessage(
+                "Name must contain at least 2 characters.",
+                false
+            );
+
+            return;
+
+        }
+
+
+        try{
+
+            const user =
+                auth.currentUser;
+
+
+            if(!user){
+
+                window.location.href =
+                    "login.html";
+
+                return;
+
+            }
+
+
+            saveBtn.disabled = true;
+
+            saveBtn.textContent =
+                "Saving...";
+
+
+            /*
+            Update Firebase profile
+            */
+
+            await updateProfile(
+                user,
+                {
+                    displayName:newName
+                }
+            );
+
+
+            /*
+            Update page
+            */
+
+            userName.textContent =
+                newName;
+
+            profileIcon.textContent =
+                newName
+                    .charAt(0)
+                    .toUpperCase();
+
+
+            showMessage(
+                "Profile updated successfully!"
+            );
+
+
+        }catch(error){
+
+            console.error(
+                "Profile update error:",
+                error
+            );
+
+            showMessage(
+                "Profile update failed. Please try again.",
+                false
+            );
+
+
+        }finally{
+
+            saveBtn.disabled = false;
+
+            saveBtn.textContent =
+                "💾 Save Changes";
+
+        }
+
+    }
+);
+
+
+/*
+=========================================
+LOGOUT
+=========================================
+*/
+
+logoutBtn.addEventListener(
+    "click",
+    async () => {
+
+        try{
+
+            await signOut(auth);
+
+            window.location.href =
+                "login.html";
+
+        }catch(error){
+
+            console.error(
+                "Logout error:",
+                error
+            );
+
+            showMessage(
+                "Logout failed. Please try again.",
+                false
+            );
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+
+</html>

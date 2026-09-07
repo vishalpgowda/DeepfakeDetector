@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>About Project</title>
+
+<title>About | Deepfake Detector</title>
 
 <style>
 
@@ -15,288 +18,1744 @@
 }
 
 body{
-    background:#f4f6f9;
+    min-height:100vh;
+    display:flex;
+    color:white;
+
+    background:
+        radial-gradient(
+            circle at 20% 20%,
+            rgba(0,229,255,0.10),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 80% 80%,
+            rgba(0,120,255,0.10),
+            transparent 30%
+        ),
+        linear-gradient(
+            135deg,
+            #040b12,
+            #071923,
+            #031018
+        );
 }
+
+
+/* =========================
+   SIDEBAR
+========================= */
+
+aside{
+
+    width:250px;
+    min-height:100vh;
+
+    padding:25px 18px;
+
+    background:rgba(5,18,28,0.88);
+
+    border-right:
+        1px solid rgba(0,229,255,0.15);
+
+    backdrop-filter:blur(18px);
+
+    position:fixed;
+
+    left:0;
+    top:0;
+    bottom:0;
+
+    z-index:10;
+}
+
+
+.logo{
+
+    text-align:center;
+
+    font-size:20px;
+
+    font-weight:bold;
+
+    letter-spacing:1px;
+
+    color:#00e5ff;
+
+    margin-bottom:8px;
+}
+
+
+.logo-subtitle{
+
+    text-align:center;
+
+    color:#718692;
+
+    font-size:11px;
+
+    margin-bottom:35px;
+
+    letter-spacing:1px;
+}
+
+
+aside ul{
+
+    list-style:none;
+
+}
+
+
+aside li{
+
+    margin:8px 0;
+
+}
+
+
+aside a,
+.logout-btn{
+
+    width:100%;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding:14px 16px;
+
+    border-radius:10px;
+
+    text-decoration:none;
+
+    color:#a9bbc5;
+
+    font-size:15px;
+
+    border:1px solid transparent;
+
+    transition:0.3s;
+
+}
+
+
+aside a:hover,
+.logout-btn:hover{
+
+    color:#00e5ff;
+
+    background:
+        rgba(0,229,255,0.08);
+
+    border-color:
+        rgba(0,229,255,0.15);
+
+    transform:translateX(3px);
+
+}
+
+
+aside a.active{
+
+    color:white;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(0,169,192,0.22),
+            rgba(0,229,255,0.08)
+        );
+
+    border:
+        1px solid rgba(0,229,255,0.25);
+
+    box-shadow:
+        0 0 20px rgba(0,229,255,0.08);
+
+}
+
+
+.logout-area{
+
+    margin-top:30px;
+
+    padding-top:20px;
+
+    border-top:
+        1px solid rgba(255,255,255,0.08);
+}
+
+
+.logout-btn{
+
+    background:transparent;
+
+    cursor:pointer;
+}
+
+
+/* =========================
+   MAIN
+========================= */
+
+section{
+
+    margin-left:250px;
+
+    width:
+        calc(100% - 250px);
+
+    padding:35px;
+}
+
+
+/* =========================
+   HEADER
+========================= */
 
 header{
-    background:#1f2937;
-    color:white;
-    text-align:center;
-    padding:20px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:35px;
 }
 
-.container{
-    width:90%;
-    max-width:1100px;
-    margin:30px auto;
+
+.header-title h1{
+
+    font-size:30px;
+
+    margin-bottom:8px;
 }
 
-.section{
-    background:white;
-    padding:25px;
-    margin-bottom:20px;
+
+.header-title h1 span{
+
+    color:#00e5ff;
+}
+
+
+.user-info{
+
+    color:#8197a4;
+
+    font-size:14px;
+}
+
+
+.back-btn{
+
+    padding:12px 18px;
+
     border-radius:10px;
-    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+
+    text-decoration:none;
+
+    color:white;
+
+    background:
+        rgba(255,255,255,0.06);
+
+    border:
+        1px solid rgba(255,255,255,0.10);
+
+    transition:0.3s;
 }
 
-.section h2{
-    color:#2563eb;
+
+.back-btn:hover{
+
+    color:#00e5ff;
+
+    border-color:
+        rgba(0,229,255,0.3);
+
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+
+    position:relative;
+
+    overflow:hidden;
+
+    padding:40px;
+
+    border-radius:20px;
+
+    margin-bottom:25px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(0,169,192,0.16),
+            rgba(0,30,45,0.35)
+        );
+
+    border:
+        1px solid rgba(0,229,255,0.18);
+
+    box-shadow:
+        0 20px 45px rgba(0,0,0,0.25);
+}
+
+
+.hero::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:260px;
+
+    height:260px;
+
+    right:-100px;
+
+    top:-120px;
+
+    border-radius:50%;
+
+    background:
+        rgba(0,229,255,0.08);
+
+    filter:blur(5px);
+}
+
+
+.hero-content{
+
+    position:relative;
+
+    z-index:1;
+
+    max-width:800px;
+}
+
+
+.hero-icon{
+
+    font-size:55px;
+
     margin-bottom:15px;
 }
 
-.section p{
-    color:#555;
+
+.hero h2{
+
+    font-size:30px;
+
+    margin-bottom:12px;
+}
+
+
+.hero h2 span{
+
+    color:#00e5ff;
+}
+
+
+.hero p{
+
+    color:#9db0bd;
+
     line-height:1.8;
-    text-align:justify;
+
+    font-size:15px;
 }
 
-ul{
-    margin-left:20px;
-    line-height:2;
-    color:#444;
+
+/* =========================
+   SECTION TITLE
+========================= */
+
+.section-title{
+
+    margin:35px 0 20px;
 }
 
-table{
-    width:100%;
-    border-collapse:collapse;
-    margin-top:15px;
+
+.section-title h2{
+
+    font-size:23px;
+
+    margin-bottom:7px;
 }
 
-table th,
-table td{
-    border:1px solid #ddd;
-    padding:12px;
-    text-align:left;
+
+.section-title p{
+
+    color:#718692;
+
+    font-size:13px;
 }
 
-table th{
-    background:#2563eb;
+
+/* =========================
+   INFO CARDS
+========================= */
+
+.info-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(240px,1fr)
+        );
+
+    gap:20px;
+}
+
+
+.info-card{
+
+    padding:25px;
+
+    border-radius:16px;
+
+    background:
+        rgba(255,255,255,0.055);
+
+    border:
+        1px solid rgba(255,255,255,0.08);
+
+    backdrop-filter:blur(15px);
+
+    box-shadow:
+        0 15px 35px rgba(0,0,0,0.25);
+
+    transition:0.3s;
+}
+
+
+.info-card:hover{
+
+    transform:translateY(-5px);
+
+    border-color:
+        rgba(0,229,255,0.22);
+
+}
+
+
+.info-icon{
+
+    width:50px;
+
+    height:50px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:12px;
+
+    margin-bottom:18px;
+
+    font-size:25px;
+
+    background:
+        rgba(0,229,255,0.08);
+
+}
+
+
+.info-card h3{
+
+    font-size:17px;
+
+    margin-bottom:10px;
+}
+
+
+.info-card p{
+
+    color:#8fa6b4;
+
+    line-height:1.7;
+
+    font-size:13px;
+}
+
+
+/* =========================
+   WORKFLOW
+========================= */
+
+.workflow{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(180px,1fr)
+        );
+
+    gap:15px;
+}
+
+
+.workflow-step{
+
+    position:relative;
+
+    padding:22px;
+
+    text-align:center;
+
+    border-radius:14px;
+
+    background:
+        rgba(255,255,255,0.045);
+
+    border:
+        1px solid rgba(255,255,255,0.07);
+}
+
+
+.step-number{
+
+    width:40px;
+
+    height:40px;
+
+    margin:0 auto 13px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #00a9c0,
+            #00e5ff
+        );
+
     color:white;
+
+    font-weight:bold;
+
+    box-shadow:
+        0 0 20px rgba(0,229,255,0.15);
 }
+
+
+.workflow-step h3{
+
+    font-size:14px;
+
+    margin-bottom:7px;
+}
+
+
+.workflow-step p{
+
+    color:#718692;
+
+    font-size:12px;
+
+    line-height:1.6;
+}
+
+
+/* =========================
+   TECHNOLOGY
+========================= */
+
+.tech-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(180px,1fr)
+        );
+
+    gap:15px;
+}
+
+
+.tech{
+
+    padding:20px;
+
+    border-radius:13px;
+
+    background:
+        rgba(0,0,0,0.18);
+
+    border:
+        1px solid rgba(255,255,255,0.07);
+
+    text-align:center;
+
+    transition:0.3s;
+}
+
+
+.tech:hover{
+
+    border-color:
+        rgba(0,229,255,0.25);
+
+    transform:translateY(-3px);
+}
+
+
+.tech-icon{
+
+    font-size:30px;
+
+    margin-bottom:10px;
+}
+
+
+.tech h3{
+
+    font-size:14px;
+
+    margin-bottom:5px;
+}
+
+
+.tech p{
+
+    color:#718692;
+
+    font-size:11px;
+}
+
+
+/* =========================
+   SECURITY
+========================= */
+
+.security-box{
+
+    padding:28px;
+
+    border-radius:16px;
+
+    background:
+        rgba(255,255,255,0.055);
+
+    border:
+        1px solid rgba(255,255,255,0.08);
+
+}
+
+
+.security-list{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(220px,1fr)
+        );
+
+    gap:15px;
+
+    margin-top:18px;
+}
+
+
+.security-item{
+
+    padding:17px;
+
+    border-radius:11px;
+
+    background:
+        rgba(0,0,0,0.15);
+
+    color:#9db0bd;
+
+    font-size:13px;
+
+    line-height:1.6;
+}
+
+
+.security-item strong{
+
+    display:block;
+
+    color:white;
+
+    margin-bottom:5px;
+}
+
+
+/* =========================
+   PROJECT INFO
+========================= */
+
+.project-card{
+
+    margin-top:25px;
+
+    padding:25px;
+
+    border-radius:16px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(0,229,255,0.08),
+            rgba(255,255,255,0.04)
+        );
+
+    border:
+        1px solid rgba(0,229,255,0.14);
+}
+
+
+.project-card h2{
+
+    font-size:20px;
+
+    margin-bottom:15px;
+}
+
+
+.project-details{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(180px,1fr)
+        );
+
+    gap:15px;
+}
+
+
+.detail{
+
+    padding:15px;
+
+    border-radius:10px;
+
+    background:
+        rgba(0,0,0,0.15);
+}
+
+
+.detail span{
+
+    display:block;
+
+    color:#718692;
+
+    font-size:11px;
+
+    margin-bottom:6px;
+}
+
+
+.detail strong{
+
+    font-size:14px;
+
+    color:#d5e0e5;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
 
 footer{
-    background:#1f2937;
-    color:white;
+
     text-align:center;
-    padding:15px;
-    margin-top:30px;
+
+    margin-top:35px;
+
+    padding:20px 0;
+
+    color:#526875;
+
+    font-size:12px;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:900px){
+
+    aside{
+
+        width:210px;
+    }
+
+
+    section{
+
+        margin-left:210px;
+
+        width:
+            calc(100% - 210px);
+
+        padding:25px;
+    }
+
+}
+
+
+@media(max-width:700px){
+
+    body{
+
+        display:block;
+    }
+
+
+    aside{
+
+        position:relative;
+
+        width:100%;
+
+        min-height:auto;
+
+        border-right:none;
+
+        border-bottom:
+            1px solid rgba(0,229,255,0.15);
+    }
+
+
+    aside ul{
+
+        display:grid;
+
+        grid-template-columns:
+            repeat(2,1fr);
+
+        gap:5px;
+    }
+
+
+    .logout-area{
+
+        margin-top:10px;
+    }
+
+
+    section{
+
+        margin-left:0;
+
+        width:100%;
+
+        padding:20px;
+    }
+
+
+    header{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+        gap:18px;
+    }
+
+
+    .header-title h1{
+
+        font-size:24px;
+    }
+
+
+    .hero{
+
+        padding:25px;
+    }
+
+
+    .hero h2{
+
+        font-size:24px;
+    }
+
+}
+
+
+@media(max-width:480px){
+
+    aside ul{
+
+        grid-template-columns:1fr;
+    }
+
+
+    .hero-icon{
+
+        font-size:45px;
+    }
+
 }
 
 </style>
 
 </head>
 
+
 <body>
+
+
+<!-- =========================
+     SIDEBAR
+========================= -->
+
+<aside>
+
+    <div class="logo">
+        🤖 DEEPFAKE DETECTOR
+    </div>
+
+    <div class="logo-subtitle">
+        AI MEDIA AUTHENTICATION SYSTEM
+    </div>
+
+
+    <ul>
+
+        <li>
+
+            <a href="dashboard.html">
+
+                🏠
+
+                <span>
+                    Dashboard
+                </span>
+
+            </a>
+
+        </li>
+
+
+        <li>
+
+            <a href="my app home.html">
+
+                🌐
+
+                <span>
+                    Home
+                </span>
+
+            </a>
+
+        </li>
+
+
+        <li>
+
+            <a href="index.html">
+
+                📤
+
+                <span>
+                    Upload Media
+                </span>
+
+            </a>
+
+        </li>
+
+
+        <li>
+
+            <a href="analytics.html">
+
+                📊
+
+                <span>
+                    Analysis
+                </span>
+
+            </a>
+
+        </li>
+
+
+        <li>
+
+            <a
+                href="about.html"
+                class="active"
+            >
+
+                ℹ️
+
+                <span>
+                    About
+                </span>
+
+            </a>
+
+        </li>
+
+
+        <li>
+
+            <a href="profile.html">
+
+                👤
+
+                <span>
+                    Profile
+                </span>
+
+            </a>
+
+        </li>
+
+
+        <li class="logout-area">
+
+            <button
+                id="logoutBtn"
+                class="logout-btn"
+            >
+
+                🚪
+
+                <span>
+                    Logout
+                </span>
+
+            </button>
+
+        </li>
+
+    </ul>
+
+</aside>
+
+
+<!-- =========================
+     MAIN CONTENT
+========================= -->
+
+<section>
+
 
 <header>
 
-<h1>About Deepfake Face Detector</h1>
+    <div class="header-title">
 
-<p>Artificial Intelligence Based Fake Image and Video Detection System</p>
+        <h1>
+            About <span>Deepfake Detector</span>
+        </h1>
+
+        <p
+            class="user-info"
+            id="welcomeUser"
+        >
+            Checking login...
+        </p>
+
+    </div>
+
+
+    <a
+        href="dashboard.html"
+        class="back-btn"
+    >
+        ← Dashboard
+    </a>
 
 </header>
 
-<div class="container">
 
-<div class="section">
+<!-- =========================
+     HERO
+========================= -->
 
-<h2>Project Overview</h2>
+<div class="hero">
 
-<p>
-The Deepfake Face Detector is an Artificial Intelligence (AI) based web application
-developed to identify manipulated images and videos. Deepfake technology uses deep
-learning algorithms to create realistic fake media, making it difficult to distinguish
-between genuine and altered content. This project helps users verify the authenticity
-of digital media by analyzing uploaded files and predicting whether they are real or fake.
-</p>
+    <div class="hero-content">
 
-</div>
+        <div class="hero-icon">
+            🧠
+        </div>
 
-<div class="section">
+        <h2>
+            Intelligent <span>Deepfake Detection</span>
+        </h2>
 
-<h2>Project Objectives</h2>
+        <p>
 
-<ul>
+            The Deepfake Detector is an AI-powered media
+            authentication system designed to analyze images
+            and videos and identify whether the uploaded media
+            appears to be real or potentially manipulated.
 
-<li>Detect fake face images generated using AI.</li>
+            The system uses a deep learning model to examine
+            visual patterns and provide a prediction along
+            with a confidence score.
 
-<li>Identify manipulated videos created through deepfake technology.</li>
+        </p>
 
-<li>Provide quick and accurate detection results.</li>
-
-<li>Reduce the spread of misinformation and fake media.</li>
-
-<li>Create a simple and user-friendly web application.</li>
-
-</ul>
+    </div>
 
 </div>
 
-<div class="section">
 
-<h2>Key Features</h2>
+<!-- =========================
+     ABOUT SYSTEM
+========================= -->
 
-<ul>
+<div class="section-title">
 
-<li>Upload image and video files for analysis.</li>
+    <h2>
+        🔍 What is Deepfake Detection?
+    </h2>
 
-<li>AI-powered deepfake detection.</li>
-
-<li>Fast prediction of Real or Fake media.</li>
-
-<li>Simple and responsive user interface.</li>
-
-<li>Secure processing of uploaded files.</li>
-
-</ul>
+    <p>
+        Understanding the purpose of the system
+    </p>
 
 </div>
 
-<div class="section">
 
-<h2>How the System Works</h2>
+<div class="info-grid">
 
-<ol style="margin-left:20px; line-height:2; color:#444;">
 
-<li>User uploads an image or video.</li>
+    <div class="info-card">
 
-<li>The uploaded file is processed by the backend server.</li>
+        <div class="info-icon">
+            🤖
+        </div>
 
-<li>The AI model extracts facial features and analyzes inconsistencies.</li>
+        <h3>
+            AI Powered
+        </h3>
 
-<li>The trained deep learning model predicts whether the media is Real or Fake.</li>
+        <p>
 
-<li>The prediction result is displayed to the user.</li>
+            The system uses deep learning techniques
+            to identify visual characteristics that
+            may indicate manipulated or AI-generated media.
 
-</ol>
+        </p>
 
-</div>
+    </div>
 
-<div class="section">
 
-<h2>Technologies Used</h2>
+    <div class="info-card">
 
-<table>
+        <div class="info-icon">
+            🖼️
+        </div>
 
-<tr>
+        <h3>
+            Image Analysis
+        </h3>
 
-<th>Technology</th>
+        <p>
 
-<th>Purpose</th>
+            Users can upload supported image files.
+            The AI model processes the image and provides
+            a prediction and confidence score.
 
-</tr>
+        </p>
 
-<tr>
+    </div>
 
-<td>HTML</td>
 
-<td>Structure of the website</td>
+    <div class="info-card">
 
-</tr>
+        <div class="info-icon">
+            🎥
+        </div>
 
-<tr>
+        <h3>
+            Video Analysis
+        </h3>
 
-<td>CSS</td>
+        <p>
 
-<td>Styling and layout</td>
+            The system supports video uploads and can
+            analyze visual information from the video
+            to identify possible manipulated content.
 
-</tr>
+        </p>
 
-<tr>
+    </div>
 
-<td>JavaScript</td>
 
-<td>User interaction and validation</td>
+    <div class="info-card">
 
-</tr>
+        <div class="info-icon">
+            📊
+        </div>
 
-<tr>
+        <h3>
+            Analytics
+        </h3>
 
-<td>Python</td>
+        <p>
 
-<td>Backend programming</td>
+            Detection results are recorded in the
+            analysis history so users can monitor
+            their previous media analysis activity.
 
-</tr>
+        </p>
 
-<tr>
+    </div>
 
-<td>Flask</td>
-
-<td>Web framework</td>
-
-</tr>
-
-<tr>
-
-<td>TensorFlow</td>
-
-<td>Deep learning model</td>
-
-</tr>
-
-<tr>
-
-<td>OpenCV</td>
-
-<td>Image and video processing</td>
-
-</tr>
-
-</table>
 
 </div>
 
-<div class="section">
 
-<h2>Applications</h2>
+<!-- =========================
+     WORKFLOW
+========================= -->
 
-<ul>
+<div class="section-title">
 
-<li>Social media content verification.</li>
+    <h2>
+        ⚙️ How the System Works
+    </h2>
 
-<li>Digital media authentication.</li>
-
-<li>Cybersecurity and fraud prevention.</li>
-
-<li>Journalism and fact-checking.</li>
-
-<li>Law enforcement investigations.</li>
-
-<li>Educational and research purposes.</li>
-
-</ul>
+    <p>
+        The detection process follows several steps
+    </p>
 
 </div>
 
-<div class="section">
 
-<h2>Future Enhancements</h2>
+<div class="workflow">
 
-<ul>
 
-<li>Real-time webcam deepfake detection.</li>
+    <div class="workflow-step">
 
-<li>Support for live video streaming analysis.</li>
+        <div class="step-number">
+            1
+        </div>
 
-<li>Higher accuracy using advanced AI models.</li>
+        <h3>
+            Upload
+        </h3>
 
-<li>Cloud-based deployment.</li>
+        <p>
+            Select an image or video from your device.
+        </p>
 
-<li>Mobile application support.</li>
+    </div>
 
-<li>Detailed detection reports with confidence scores.</li>
 
-</ul>
+    <div class="workflow-step">
+
+        <div class="step-number">
+            2
+        </div>
+
+        <h3>
+            Preprocessing
+        </h3>
+
+        <p>
+            The uploaded media is prepared for AI analysis.
+        </p>
+
+    </div>
+
+
+    <div class="workflow-step">
+
+        <div class="step-number">
+            3
+        </div>
+
+        <h3>
+            AI Analysis
+        </h3>
+
+        <p>
+            The deep learning model analyzes visual features.
+        </p>
+
+    </div>
+
+
+    <div class="workflow-step">
+
+        <div class="step-number">
+            4
+        </div>
+
+        <h3>
+            Prediction
+        </h3>
+
+        <p>
+            The system predicts Real or potential Deepfake.
+        </p>
+
+    </div>
+
+
+    <div class="workflow-step">
+
+        <div class="step-number">
+            5
+        </div>
+
+        <h3>
+            Result
+        </h3>
+
+        <p>
+            Prediction and confidence are displayed to the user.
+        </p>
+
+    </div>
+
 
 </div>
 
+
+<!-- =========================
+     TECHNOLOGIES
+========================= -->
+
+<div class="section-title">
+
+    <h2>
+        🛠 Technologies Used
+    </h2>
+
+    <p>
+        Technologies supporting the detection platform
+    </p>
+
 </div>
+
+
+<div class="tech-grid">
+
+
+    <div class="tech">
+
+        <div class="tech-icon">
+            🐍
+        </div>
+
+        <h3>
+            Python
+        </h3>
+
+        <p>
+            AI and backend development
+        </p>
+
+    </div>
+
+
+    <div class="tech">
+
+        <div class="tech-icon">
+            🧠
+        </div>
+
+        <h3>
+            PyTorch
+        </h3>
+
+        <p>
+            Deep learning framework
+        </p>
+
+    </div>
+
+
+    <div class="tech">
+
+        <div class="tech-icon">
+            👁️
+        </div>
+
+        <h3>
+            OpenCV
+        </h3>
+
+        <p>
+            Image and video processing
+        </p>
+
+    </div>
+
+
+    <div class="tech">
+
+        <div class="tech-icon">
+            🌐
+        </div>
+
+        <h3>
+            HTML / CSS / JS
+        </h3>
+
+        <p>
+            Frontend interface
+        </p>
+
+    </div>
+
+
+    <div class="tech">
+
+        <div class="tech-icon">
+            🔥
+        </div>
+
+        <h3>
+            Firebase
+        </h3>
+
+        <p>
+            Authentication and user management
+        </p>
+
+    </div>
+
+
+    <div class="tech">
+
+        <div class="tech-icon">
+            ⚡
+        </div>
+
+        <h3>
+            Vite
+        </h3>
+
+        <p>
+            Frontend development environment
+        </p>
+
+    </div>
+
+
+</div>
+
+
+<!-- =========================
+     SECURITY
+========================= -->
+
+<div class="section-title">
+
+    <h2>
+        🔐 Security & Privacy
+    </h2>
+
+    <p>
+        Important principles of the detection platform
+    </p>
+
+</div>
+
+
+<div class="security-box">
+
+    <p style="color:#9db0bd; line-height:1.8; font-size:14px;">
+
+        The system is designed with user authentication
+        and controlled access to the application. Firebase
+        Authentication is used to manage user login sessions.
+        Analysis history is maintained within the browser
+        for the current application environment.
+
+    </p>
+
+
+    <div class="security-list">
+
+
+        <div class="security-item">
+
+            <strong>
+                🔑 Authentication
+            </strong>
+
+            Only authenticated users can access protected
+            dashboard pages.
+
+        </div>
+
+
+        <div class="security-item">
+
+            <strong>
+                🛡️ Controlled Access
+            </strong>
+
+            Authentication state is checked before allowing
+            access to protected pages.
+
+        </div>
+
+
+        <div class="security-item">
+
+            <strong>
+                📊 Analysis History
+            </strong>
+
+            Detection results can be monitored through
+            the analytics dashboard.
+
+        </div>
+
+
+        <div class="security-item">
+
+            <strong>
+                ⚠️ AI Limitations
+            </strong>
+
+            AI predictions should be treated as indicators
+            and not as absolute proof that media is authentic
+            or manipulated.
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     PROJECT INFORMATION
+========================= -->
+
+<div class="project-card">
+
+    <h2>
+        📋 Project Information
+    </h2>
+
+
+    <div class="project-details">
+
+
+        <div class="detail">
+
+            <span>
+                PROJECT
+            </span>
+
+            <strong>
+                Deepfake Detector
+            </strong>
+
+        </div>
+
+
+        <div class="detail">
+
+            <span>
+                DOMAIN
+            </span>
+
+            <strong>
+                Cybersecurity & AI
+            </strong>
+
+        </div>
+
+
+        <div class="detail">
+
+            <span>
+                APPLICATION
+            </span>
+
+            <strong>
+                Media Authentication
+            </strong>
+
+        </div>
+
+
+        <div class="detail">
+
+            <span>
+                AI TECHNOLOGY
+            </span>
+
+            <strong>
+                Deep Learning
+            </strong>
+
+        </div>
+
+
+        <div class="detail">
+
+            <span>
+                MEDIA
+            </span>
+
+            <strong>
+                Images & Videos
+            </strong>
+
+        </div>
+
+
+        <div class="detail">
+
+            <span>
+                YEAR
+            </span>
+
+            <strong>
+                2026
+            </strong>
+
+        </div>
+
+
+    </div>
+
+</div>
+
 
 <footer>
 
-<p>© 2026 Deepfake Face Detector | Academic Project</p>
+    © 2026 Deepfake Face Detector
+    | AI Powered Detection System
 
 </footer>
 
+
+</section>
+
+
+<!-- =========================
+     FIREBASE
+========================= -->
+
+<script type="module">
+
+import { auth } from "./src/firebase.js";
+
+import {
+    onAuthStateChanged,
+    signOut
+} from "firebase/auth";
+
+
+/* =========================
+   CHECK LOGIN
+========================= */
+
+onAuthStateChanged(auth, (user) => {
+
+    if(user){
+
+        const name =
+            user.displayName || "User";
+
+        const email =
+            user.email || "";
+
+        document.getElementById(
+            "welcomeUser"
+        ).textContent =
+            "Welcome, " +
+            name +
+            " (" +
+            email +
+            ")";
+
+    }
+
+    else{
+
+        window.location.href =
+            "login.html";
+
+    }
+
+});
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+document
+    .getElementById("logoutBtn")
+    .addEventListener(
+        "click",
+        async () => {
+
+            try{
+
+                await signOut(auth);
+
+                window.location.href =
+                    "login.html";
+
+            }
+
+            catch(error){
+
+                console.error(
+                    "Logout error:",
+                    error
+                );
+
+                alert(
+                    "Logout failed. Please try again."
+                );
+
+            }
+
+        }
+    );
+
+</script>
+
+
 </body>
+
 </html>
