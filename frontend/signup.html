@@ -80,6 +80,8 @@ a{
 
 <h2>Create Account</h2>
 
+<input type="text" id="name" placeholder="Enter Name">
+
 <input type="email" id="email" placeholder="Enter Email">
 
 <input type="password" id="password" placeholder="Enter Password">
@@ -96,24 +98,46 @@ Already have an account?
 <script type="module">
 
 import { auth } from "./src/firebase.js";
-import { createUserWithEmailAndPassword } from "firebase/auth";
 
-document.getElementById("signupBtn").addEventListener("click", async()=>{
+import {
+    createUserWithEmailAndPassword,
+    updateProfile
+} from "firebase/auth";
 
-    const email=document.getElementById("email").value;
-    const password=document.getElementById("password").value;
 
-    try{
+document.getElementById("signupBtn").addEventListener("click", async () => {
 
-        await createUserWithEmailAndPassword(auth,email,password);
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
+
+
+    if (!name || !email || !password) {
+        alert("Please fill in all fields.");
+        return;
+    }
+
+
+    try {
+
+        const userCredential = await createUserWithEmailAndPassword(
+            auth,
+            email,
+            password
+        );
+
+
+        await updateProfile(userCredential.user, {
+            displayName: name
+        });
+
 
         alert("Account Created Successfully!");
 
-        window.location.href="login.html";
+        window.location.href = "login.html";
 
-    }
 
-    catch(error){
+    } catch (error) {
 
         alert(error.message);
 
@@ -122,6 +146,3 @@ document.getElementById("signupBtn").addEventListener("click", async()=>{
 });
 
 </script>
-
-</body>
-</html>

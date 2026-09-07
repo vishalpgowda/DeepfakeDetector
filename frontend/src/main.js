@@ -1,64 +1,96 @@
 import "./style.css";
 
 document.querySelector("#app").innerHTML = `
-    <header>
-        <h1>🤖 FakeFace Detector</h1>
-        <p>Deepfake Image & Video Detection System</p>
+    <header class="top-header">
+
+        <div class="logo">
+            🤖 DEEPFAKE DETECTOR
+        </div>
 
         <a href="/dashboard.html" class="dashboard-btn">
-            📊 Dashboard
+            ▦ &nbsp; Dashboard
         </a>
+
     </header>
 
-    <div class="container">
 
-        <div class="card">
+    <main class="detector">
 
-            <h2>Upload Image or Video</h2>
+        <h1>Deepfake Detector</h1>
 
-            <input
-                type="file"
-                id="fileInput"
-                accept="image/*,video/*"
-            >
+        <p class="subtitle">
+            Upload an image and click analyze to detect whether it is real or fake.
+        </p>
 
-            <div id="preview"></div>
 
-            <button id="analyzeButton">
-                Analyze
-            </button>
+        <div class="detector-card">
 
-            <div id="loading" class="loading">
-                🔍 AI is analyzing...
+            <div class="upload-area">
+
+                <div class="upload-icon">
+                    ☁
+                </div>
+
+                <h2>Upload an Image</h2>
+
+                <p>Click to choose an image</p>
+
+                <input
+                    type="file"
+                    id="fileInput"
+                    accept="image/*"
+                >
+
+                <label for="fileInput" class="choose-btn">
+                    Choose Image
+                </label>
+
+                <div id="preview"></div>
+
             </div>
 
-            <div id="result"></div>
+
+            <button id="analyzeButton" class="analyze-btn">
+                🔍 &nbsp; Analyze Image
+            </button>
+
+
+            <hr>
+
+
+            <div class="result-section">
+
+                <h3>Prediction</h3>
+
+                <div id="prediction">
+                    --
+                </div>
+
+
+                <h3>Confidence</h3>
+
+                <div id="confidence">
+                    -- %
+                </div>
+
+            </div>
 
         </div>
 
-    </div>
-
-    <footer>
-        © 2026 FakeFace Detector | AI Project
-    </footer>
+    </main>
 `;
 
-// Get HTML elements
+
 const fileInput = document.getElementById("fileInput");
 const preview = document.getElementById("preview");
-const loading = document.getElementById("loading");
-const result = document.getElementById("result");
 const analyzeButton = document.getElementById("analyzeButton");
+const prediction = document.getElementById("prediction");
+const confidence = document.getElementById("confidence");
 
-
-// ==========================================
-// FILE PREVIEW
-// ==========================================
 
 fileInput.addEventListener("change", function () {
 
     preview.innerHTML = "";
-    result.innerHTML = "";
 
     const file = this.files[0];
 
@@ -66,77 +98,36 @@ fileInput.addEventListener("change", function () {
         return;
     }
 
-    const url = URL.createObjectURL(file);
+    const image = document.createElement("img");
 
-    // Image preview
-    if (file.type.startsWith("image")) {
+    image.src = URL.createObjectURL(file);
 
-        const img = document.createElement("img");
-
-        img.src = url;
-        img.style.maxWidth = "100%";
-
-        preview.appendChild(img);
-    }
-
-    // Video preview
-    else if (file.type.startsWith("video")) {
-
-        const video = document.createElement("video");
-
-        video.src = url;
-        video.controls = true;
-        video.style.maxWidth = "100%";
-
-        preview.appendChild(video);
-    }
-
+    preview.appendChild(image);
 });
 
 
-// ==========================================
-// SEND IMAGE TO AI BACKEND
-// ==========================================
+analyzeButton.addEventListener("click", async function () {
 
-analyzeButton.addEventListener("click", analyzeFile);
+    if (!fileInput.files.length) {
 
-async function analyzeFile() {
-
-    // Check file
-    if (fileInput.files.length === 0) {
-
-        alert("Please upload an image.");
+        alert("Please select an image.");
 
         return;
     }
 
     const file = fileInput.files[0];
 
-    // Current backend supports images
-    if (!file.type.startsWith("image")) {
+    prediction.textContent = "Analyzing...";
+    confidence.textContent = "-- %";
 
-        alert(
-            "Please upload an image. " +
-            "Video detection will be connected next."
-        );
 
-        return;
-    }
+    const formData = new FormData();
 
-    // Show loading
-    loading.style.display = "block";
+    formData.append("file", file);
 
-    result.innerHTML = "";
 
     try {
 
-        // Create form data
-        const formData = new FormData();
-
-        formData.append("file", file);
-
-
-        // Send image to Flask API
         const response = await fetch(
             "http://127.0.0.1:5000/predict",
             {
@@ -146,60 +137,47 @@ async function analyzeFile() {
         );
 
 
-        // Convert API response to JSON
         const data = await response.json();
 
 
-        // Hide loading
-        loading.style.display = "none";
-
-
-        // Display result
         if (data.success) {
+
+            prediction.textContent = data.prediction;
+
+            confidence.textContent =
+                data.confidence + " %";
+
 
             if (data.prediction === "REAL") {
 
-                result.innerHTML =
-                    "Prediction: REAL<br>" +
-                    "Confidence: " +
-                    data.confidence +
-                    "%";
-
-                result.className = "real";
+                prediction.className = "real";
 
             } else {
 
-                result.innerHTML =
-                    "Prediction: DEEPFAKE<br>" +
-                    "Confidence: " +
-                    data.confidence +
-                    "%";
+                prediction.className = "fake";
 
-                result.className = "fake";
             }
 
         } else {
 
-            result.innerHTML =
-                "Error: " +
-                data.error;
+            prediction.textContent = "Error";
+            confidence.textContent = "-- %";
 
-            result.className = "fake";
+            alert(data.error);
+
         }
 
+    } catch (error) {
+
+        prediction.textContent = "Connection Error";
+        confidence.textContent = "-- %";
+
+        alert(
+            "Unable to connect to AI server. " +
+            "Please make sure Flask is running."
+        );
+
+        console.error(error);
     }
 
-    catch (error) {
-
-        loading.style.display = "none";
-
-        result.innerHTML =
-            "Unable to connect to AI server.<br>" +
-            "Make sure the Flask API is running.";
-
-        result.className = "fake";
-
-        console.error("API Error:", error);
-    }
-
-}
+});
