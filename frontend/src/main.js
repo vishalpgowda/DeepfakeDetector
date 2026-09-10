@@ -1,6 +1,7 @@
 import "./style.css";
 
 document.querySelector("#app").innerHTML = `
+
 <header class="top-header">
 
     <div class="logo">
@@ -8,22 +9,38 @@ document.querySelector("#app").innerHTML = `
     </div>
 
     <a href="/dashboard.html" class="dashboard-btn">
-        🏠 &nbsp; Dashboard
+        🏠 Dashboard
     </a>
 
 </header>
 
+
 <main class="detector">
 
-    <h1>📤 Upload Media</h1>
+    <div class="page-heading">
 
-    <p class="subtitle">
-        Upload an image or video and click analyze to detect whether it is real or fake.
-    </p>
+        <div class="heading-icon">
+            🔍
+        </div>
+
+        <div>
+            <h1>Media Analysis</h1>
+
+            <p class="subtitle">
+                Upload an image or video and let our AI model detect
+                possible deepfake content.
+            </p>
+        </div>
+
+    </div>
+
 
     <div class="detector-card">
 
-        <div class="upload-area">
+
+        <!-- UPLOAD AREA -->
+
+        <div class="upload-area" id="uploadArea">
 
             <div class="upload-icon">
                 ☁️
@@ -32,14 +49,21 @@ document.querySelector("#app").innerHTML = `
             <h2>Upload Media</h2>
 
             <p>
-                Select an image or video to analyze for possible deepfake content.
+                Drag & drop your image or video here
             </p>
+
+            <span class="or-text">
+                or
+            </span>
+
 
             <input
                 type="file"
                 id="fileInput"
                 accept="image/*,video/*"
+                hidden
             >
+
 
             <label
                 for="fileInput"
@@ -48,150 +72,332 @@ document.querySelector("#app").innerHTML = `
                 📁 Choose Image / Video
             </label>
 
-            <div id="preview"></div>
+
+            <p class="supported">
+                Supported: JPG, JPEG, PNG, MP4, AVI, MOV
+            </p>
 
         </div>
+
+
+        <!-- PREVIEW -->
+
+        <div
+            id="preview"
+            class="preview"
+        ></div>
+
+
+        <!-- ANALYZE BUTTON -->
 
         <button
             id="analyzeButton"
             class="analyze-btn"
         >
-            🔍 &nbsp; Analyze Media
+            🔍 Analyze Media
         </button>
+
+
+        <!-- RESULT -->
 
         <div class="result-section">
 
-            <h3>Prediction</h3>
+            <div class="result-box">
 
-            <h3>Confidence</h3>
+                <span class="result-label">
+                    Prediction
+                </span>
 
-            <div
-                id="prediction"
-                class="prediction"
-            >
-                --
+                <div
+                    id="prediction"
+                    class="prediction"
+                >
+                    --
+                </div>
+
             </div>
 
-            <div
-                id="confidence"
-                class="confidence"
-            >
-                -- %
+
+            <div class="result-box">
+
+                <span class="result-label">
+                    Confidence
+                </span>
+
+                <div
+                    id="confidence"
+                    class="confidence"
+                >
+                    -- %
+                </div>
+
             </div>
 
         </div>
+
+
+        <!-- STATUS -->
 
         <div
             id="status"
             class="status"
         ></div>
 
+
     </div>
 
 </main>
 `;
 
-const fileInput = document.getElementById("fileInput");
-const preview = document.getElementById("preview");
-const analyzeButton = document.getElementById("analyzeButton");
-const prediction = document.getElementById("prediction");
-const confidence = document.getElementById("confidence");
-const status = document.getElementById("status");
+
+const fileInput =
+    document.getElementById("fileInput");
+
+const preview =
+    document.getElementById("preview");
+
+const uploadArea =
+    document.getElementById("uploadArea");
+
+const analyzeButton =
+    document.getElementById("analyzeButton");
+
+const prediction =
+    document.getElementById("prediction");
+
+const confidence =
+    document.getElementById("confidence");
+
+const status =
+    document.getElementById("status");
+
 
 
 /* =========================================================
-   LOAD SELECTED FILE
+   FILE SELECTION
 ========================================================= */
 
-fileInput.addEventListener("change", function () {
+fileInput.addEventListener(
+    "change",
+    function () {
 
-    preview.innerHTML = "";
+        const file = this.files[0];
 
-    prediction.textContent = "--";
-    confidence.textContent = "-- %";
+        resetResult();
 
-    prediction.className = "prediction";
-    confidence.className = "confidence";
+        preview.innerHTML = "";
 
-    status.textContent = "";
-    status.className = "status";
+        if (!file) {
+            return;
+        }
 
-    const file = this.files[0];
 
-    if (!file) {
-        return;
+        if (
+            !file.type.startsWith("image/") &&
+            !file.type.startsWith("video/")
+        ) {
+
+            alert(
+                "Please select an image or video file."
+            );
+
+            fileInput.value = "";
+
+            return;
+        }
+
+
+        showPreview(file);
+
     }
+);
 
-    /* Check file type */
 
-    if (
-        !file.type.startsWith("image/") &&
-        !file.type.startsWith("video/")
-    ) {
 
-        alert("Please select an image or video file.");
+/* =========================================================
+   DRAG AND DROP
+========================================================= */
 
-        fileInput.value = "";
+uploadArea.addEventListener(
+    "dragover",
+    function (event) {
 
-        return;
+        event.preventDefault();
+
+        uploadArea.classList.add(
+            "dragging"
+        );
+
     }
+);
 
 
-    /* IMAGE PREVIEW */
+uploadArea.addEventListener(
+    "dragleave",
+    function () {
+
+        uploadArea.classList.remove(
+            "dragging"
+        );
+
+    }
+);
+
+
+uploadArea.addEventListener(
+    "drop",
+    function (event) {
+
+        event.preventDefault();
+
+        uploadArea.classList.remove(
+            "dragging"
+        );
+
+
+        const file =
+            event.dataTransfer.files[0];
+
+
+        if (!file) {
+            return;
+        }
+
+
+        if (
+            !file.type.startsWith("image/") &&
+            !file.type.startsWith("video/")
+        ) {
+
+            alert(
+                "Please drop an image or video file."
+            );
+
+            return;
+        }
+
+
+        fileInput.files =
+            event.dataTransfer.files;
+
+
+        resetResult();
+
+        preview.innerHTML = "";
+
+        showPreview(file);
+
+    }
+);
+
+
+
+/* =========================================================
+   SHOW PREVIEW
+========================================================= */
+
+function showPreview(file) {
+
+    const url =
+        URL.createObjectURL(file);
+
 
     if (file.type.startsWith("image/")) {
 
-        const image = document.createElement("img");
+        const image =
+            document.createElement("img");
 
-        image.src = URL.createObjectURL(file);
 
-        image.alt = "Selected Image";
+        image.src = url;
+
+        image.alt =
+            "Selected media";
+
 
         preview.appendChild(image);
 
     }
 
 
-    /* VIDEO PREVIEW */
+    else if (
+        file.type.startsWith("video/")
+    ) {
 
-    else if (file.type.startsWith("video/")) {
+        const video =
+            document.createElement("video");
 
-        const video = document.createElement("video");
 
-        video.src = URL.createObjectURL(file);
+        video.src = url;
 
         video.controls = true;
 
         video.muted = true;
 
-        video.style.maxWidth = "100%";
-
-        video.style.maxHeight = "300px";
 
         preview.appendChild(video);
+
     }
 
-});
+}
+
+
+
+/* =========================================================
+   RESET RESULT
+========================================================= */
+
+function resetResult() {
+
+    prediction.textContent = "--";
+
+    confidence.textContent = "-- %";
+
+
+    prediction.className =
+        "prediction";
+
+
+    confidence.className =
+        "confidence";
+
+
+    status.textContent = "";
+
+    status.className =
+        "status";
+
+}
+
 
 
 /* =========================================================
    SAVE ANALYSIS RESULT
 ========================================================= */
 
-function saveAnalysisResult(file, result, confidenceValue) {
+function saveAnalysisResult(
+    file,
+    result,
+    confidenceValue
+) {
 
     let history = [];
+
 
     try {
 
         history =
             JSON.parse(
-                localStorage.getItem("deepfakeAnalysisHistory")
+                localStorage.getItem(
+                    "deepfakeAnalysisHistory"
+                )
             ) || [];
 
-    } catch (error) {
+    }
+
+    catch (error) {
 
         history = [];
+
     }
 
 
@@ -202,31 +408,41 @@ function saveAnalysisResult(file, result, confidenceValue) {
 
 
     const isFake =
-        result.toUpperCase().includes("FAKE");
+        result
+            .toUpperCase()
+            .includes("FAKE");
 
 
     const analysis = {
 
         id: Date.now(),
 
-        fileName: file.name,
+        fileName:
+            file.name,
 
-        mediaType: mediaType,
+        mediaType:
+            mediaType,
 
-        prediction: isFake
-            ? "Deepfake"
-            : "Real",
+        prediction:
+            isFake
+                ? "Deepfake"
+                : "Real",
 
         confidence:
-            parseFloat(confidenceValue) || 0,
+            parseFloat(
+                confidenceValue
+            ) || 0,
 
         date:
-            new Date().toLocaleString()
+            new Date()
+                .toLocaleString()
 
     };
 
 
-    history.push(analysis);
+    history.push(
+        analysis
+    );
 
 
     localStorage.setItem(
@@ -237,6 +453,7 @@ function saveAnalysisResult(file, result, confidenceValue) {
 }
 
 
+
 /* =========================================================
    ANALYZE MEDIA
 ========================================================= */
@@ -245,9 +462,12 @@ analyzeButton.addEventListener(
     "click",
     async function () {
 
+
         if (!fileInput.files.length) {
 
-            alert("Please select an image or video first.");
+            alert(
+                "Please select an image or video first."
+            );
 
             return;
         }
@@ -257,14 +477,16 @@ analyzeButton.addEventListener(
             fileInput.files[0];
 
 
-        analyzeButton.disabled = true;
+        analyzeButton.disabled =
+            true;
 
-        analyzeButton.textContent =
+
+        analyzeButton.innerHTML =
             "⏳ Analyzing...";
 
 
         prediction.textContent =
-            "Analyzing...";
+            "Analyzing";
 
 
         confidence.textContent =
@@ -280,7 +502,7 @@ analyzeButton.addEventListener(
 
 
         status.textContent =
-            "🤖 AI model is analyzing the media...";
+            "🤖 AI model is analyzing your media...";
 
 
         status.className =
@@ -298,6 +520,7 @@ analyzeButton.addEventListener(
 
 
         try {
+
 
             const response =
                 await fetch(
@@ -323,10 +546,6 @@ analyzeButton.addEventListener(
                 await response.json();
 
 
-            /* =========================================
-               SUCCESS
-            ========================================= */
-
             if (data.success) {
 
 
@@ -338,8 +557,6 @@ analyzeButton.addEventListener(
                     data.confidence + " %";
 
 
-                /* Save result */
-
                 saveAnalysisResult(
                     file,
                     data.prediction,
@@ -347,13 +564,12 @@ analyzeButton.addEventListener(
                 );
 
 
-                /* REAL */
-
                 if (
                     data.prediction
                         .toUpperCase()
                         .includes("REAL")
                 ) {
+
 
                     prediction.className =
                         "prediction real";
@@ -369,9 +585,8 @@ analyzeButton.addEventListener(
                 }
 
 
-                /* DEEPFAKE */
-
                 else {
+
 
                     prediction.className =
                         "prediction fake";
@@ -389,11 +604,8 @@ analyzeButton.addEventListener(
             }
 
 
-            /* =========================================
-               BACKEND ERROR
-            ========================================= */
-
             else {
+
 
                 prediction.textContent =
                     "Error";
@@ -410,17 +622,20 @@ analyzeButton.addEventListener(
 
                 status.className =
                     "status error";
-            }
 
+            }
 
         }
 
 
-        /* =============================================
-           CONNECTION ERROR
-        ============================================= */
-
         catch (error) {
+
+
+            console.error(
+                "AI Server Error:",
+                error
+            );
+
 
             prediction.textContent =
                 "Connection Error";
@@ -435,29 +650,24 @@ analyzeButton.addEventListener(
 
 
             status.textContent =
-                "❌ Unable to connect to AI server. Please make sure Flask is running.";
+                "❌ Unable to connect to AI server. Make sure api.py is running.";
 
 
             status.className =
                 "status error";
-
-
-            console.error(
-                "AI Server Error:",
-                error
-            );
 
         }
 
 
         finally {
 
+
             analyzeButton.disabled =
                 false;
 
 
-            analyzeButton.textContent =
-                "🔍  Analyze Media";
+            analyzeButton.innerHTML =
+                "🔍 Analyze Media";
 
         }
 
